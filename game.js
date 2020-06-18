@@ -27,18 +27,16 @@ randomizeMatrix(matrix)
 next_matrix = copyMatrix(matrix)
 
 
-const drawGrid = (matrix) => { 
-    let c = document.getElementById("canvas");
-    let context = c.getContext("2d");
+const drawGrid = (matrix, context) => { 
     context.clearRect(0, 0, 500, 500);
     for (let row = 0; row < matrix.length; row++) {
         for (let col = 0; col < matrix.length; col++) {
             if (matrix[row][col] === 1) {
                 context.fillStyle = "#000";
-                context.fillRect(row*10, col*10, 10, 10);
+                context.fillRect(col*10, row*10, 10, 10);
             } else {
                 context.fillStyle = "#fff";
-                context.fillRect(row*10, col*10, 10, 10);
+                context.fillRect(col*10, row*10, 10, 10);
             }
         }
     }
@@ -79,13 +77,38 @@ function sleep(ms) {
 }
 
 async function tick() {
-    drawGrid(matrix);
+    drawGrid(matrix, context);
     conway(matrix, next_matrix)
-    matrix = copyMatrix(next_matrix)
-    await sleep(200)
-    requestAnimationFrame(tick);
+    // matrix = copyMatrix(next_matrix)
+    // await sleep(200)
+    // requestAnimationFrame(tick);
 }
 
+const toggleElem = (row, col) => {
+    curr = matrix[row][col]
+    if (curr) {
+        matrix[row][col] = 0
+        context.fillStyle = "#fff";
+    } else {
+        matrix[row][col] = 1
+        context.fillStyle = "#000";
+    }
+    context.fillRect(col*10, row*10, 10, 10);
+}
 
+canvas = document.getElementById("canvas")
+context = canvas.getContext("2d");
+let elemLeft = canvas.offsetLeft;
+let elemTop = canvas.offsetTop;
+
+canvas.addEventListener('click', function(event) {
+   let xVal = event.pageX - elemLeft;
+   let yVal = event.pageY - elemTop;
+   let row = Math.floor(yVal / 10)
+   let col = Math.floor(xVal / 10)
+   toggleElem(row, col)
+
+}, false);
 
 tick()
+

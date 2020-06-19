@@ -111,7 +111,7 @@ canvas.addEventListener('click', function(event) {
    let yVal = event.pageY - elemTop;
    let row = Math.floor(yVal / pixelSize)
    let col = Math.floor(xVal / pixelSize)
-   toggleElem(row, col, pixelSize)
+   toggleElem(col, row, pixelSize)
 
 }, false);
 

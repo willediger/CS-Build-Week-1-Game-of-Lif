@@ -94,9 +94,11 @@ context = canvas.getContext("2d");
 let elemLeft = canvas.offsetLeft;
 let elemTop = canvas.offsetTop;
 
+let matrix = null
+let next_matrix = null
+
 const initialize = (size) => {
     matrix = createMatrix(size)
-    randomizeMatrix(matrix)
     next_matrix = copyMatrix(matrix)
 }
 
@@ -144,7 +146,7 @@ const patterns = [
     [[0,0],[0,1],[0,2],[1,-1],[1,0],[1,1]],
 ]
 
-middle = Math.floor(pixelWidth/2)+1
+let middle = Math.floor(pixelWidth/2)+1
 for (let i = 0; i < patterns.length; i++) {
     for (let j = 0; j < patterns[i].length; j++) {
         patterns[i][j][0] += middle
@@ -152,30 +154,54 @@ for (let i = 0; i < patterns.length; i++) {
     }
 }
 
-pattern = document.getElementById("pattern")
+let pattern = document.getElementById("pattern")
 
 
 pattern.addEventListener('change', function(event) {
-    drawPattern(patterns[pattern.selectedIndex])
+    initialize(pixelWidth)
+    if (pattern.selectedIndex == 1) {
+        randomizeMatrix(matrix)
+        drawGrid(matrix, context, pixelSize);
+    } else {
+        drawPattern(patterns[pattern.selectedIndex])
+        drawGrid(matrix, context, pixelSize);
+    }
  
  }, false);
 
  const drawPattern = (pattern) => {
-     context.clearRect(0, 0, width, width);
-     context.fillStyle = "#000";
      for (let i = 0; i < pattern.length; i++) {
-        fillPixel(pattern[i][1], pattern[i][0], pixelSize);
+        console.log(pattern[i])
+        matrix[pattern[i][1]][pattern[i][0]] = 1
      }
  }
 
 
+
+
+ let loop = false
  async function tick() {
-    drawGrid(matrix, context, pixelSize);
-    conway(matrix, next_matrix)
-    // matrix = copyMatrix(next_matrix)
-    // await sleep(200)
-    // requestAnimationFrame(tick);
+    if (loop) {
+        drawGrid(matrix, context, pixelSize);
+        conway(matrix, next_matrix)
+        matrix = copyMatrix(next_matrix)
+        await sleep(200)
+    }
+    requestAnimationFrame(tick);
 }
+
+
+
+const start = document.getElementById("start")
+const stop = document.getElementById("stop")
+
+start.addEventListener('click', function(event) {
+    loop = true;
+}, false);
+
+stop.addEventListener('click', function(event) {
+    loop = false;
+}, false);
 
 
 tick()

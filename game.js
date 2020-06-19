@@ -142,3 +142,11 @@ const patterns = [
     //Toad
     [[0,0],[0,1],[0,2],[1,-1],[1,0],[1,1]],
 ]
+
+middle = Math.floor(pixelWidth/2)+1
+for (let i = 0; i < patterns.length; i++) {
+    for (let j = 0; j < patterns[i].length; j++) {
+        patterns[i][j][0] += middle
+        patterns[i][j][1] += middle
+    }
+}

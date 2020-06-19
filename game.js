@@ -21,22 +21,18 @@ const copyMatrix = src => {
     });
 }
 
-matrix = createMatrix(50)
-randomizeMatrix(matrix)
 
-next_matrix = copyMatrix(matrix)
-
-
-const drawGrid = (matrix, context) => { 
-    context.clearRect(0, 0, 500, 500);
+const drawGrid = (matrix, context, pixelSize) => { 
+    width = matrix.length * pixelSize
+    context.clearRect(0, 0, width, width);
     for (let row = 0; row < matrix.length; row++) {
         for (let col = 0; col < matrix.length; col++) {
             if (matrix[row][col] === 1) {
                 context.fillStyle = "#000";
-                context.fillRect(col*10, row*10, 10, 10);
+                context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
             } else {
                 context.fillStyle = "#fff";
-                context.fillRect(col*10, row*10, 10, 10);
+                context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
             }
         }
     }
@@ -77,14 +73,14 @@ function sleep(ms) {
 }
 
 async function tick() {
-    drawGrid(matrix, context);
+    drawGrid(matrix, context, pixelSize);
     conway(matrix, next_matrix)
-    // matrix = copyMatrix(next_matrix)
-    // await sleep(200)
-    // requestAnimationFrame(tick);
+    matrix = copyMatrix(next_matrix)
+    await sleep(200)
+    requestAnimationFrame(tick);
 }
 
-const toggleElem = (row, col) => {
+const toggleElem = (row, col, pixelSize) => {
     curr = matrix[row][col]
     if (curr) {
         matrix[row][col] = 0
@@ -93,7 +89,7 @@ const toggleElem = (row, col) => {
         matrix[row][col] = 1
         context.fillStyle = "#000";
     }
-    context.fillRect(col*10, row*10, 10, 10);
+    context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
 }
 
 canvas = document.getElementById("canvas")
@@ -101,12 +97,21 @@ context = canvas.getContext("2d");
 let elemLeft = canvas.offsetLeft;
 let elemTop = canvas.offsetTop;
 
+const initialize = (size) => {
+    matrix = createMatrix(size)
+    randomizeMatrix(matrix)
+    next_matrix = copyMatrix(matrix)
+}
+
+const pixelSize = 10
+initialize(50)
+
 canvas.addEventListener('click', function(event) {
    let xVal = event.pageX - elemLeft;
    let yVal = event.pageY - elemTop;
-   let row = Math.floor(yVal / 10)
-   let col = Math.floor(xVal / 10)
-   toggleElem(row, col)
+   let row = Math.floor(yVal / pixelSize)
+   let col = Math.floor(xVal / pixelSize)
+   toggleElem(row, col, pixelSize)
 
 }, false);
 

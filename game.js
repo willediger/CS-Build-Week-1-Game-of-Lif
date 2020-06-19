@@ -148,6 +148,22 @@ for (let i = 0; i < patterns.length; i++) {
     }
 }
 
+pattern = document.getElementById("pattern")
+
+
+pattern.addEventListener('change', function(event) {
+    drawPattern(patterns[pattern.selectedIndex])
+ 
+ }, false);
+
+ const drawPattern = (pattern) => {
+     context.clearRect(0, 0, width, width);
+     context.fillStyle = "#000";
+     for (let i = 0; i < pattern.length; i++) {
+        fillPixel(pattern[i][1], pattern[i][0], pixelSize);
+     }
+ }
+
 
  async function tick() {
     drawGrid(matrix, context, pixelSize);

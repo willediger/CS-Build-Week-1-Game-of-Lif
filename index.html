@@ -17,6 +17,23 @@
         <![endif]-->
         <canvas id="canvas" width="500" height="500"></canvas>
         
+        <form>
+            <label for="pattern">Choose a pattern:</label>
+            <select name="pattern" id="pattern">
+            <option value="blank">Blank</option>
+            <option value="glider">Glider</option>
+            <option value="lwss">Light-weight spaceship</option>
+            <option value="mwss">Middle-weight spaceship</option>
+            <option value="hwss">Heavy-weight spaceship</option>
+            <option value="gosper">Gosper glider gun</option>
+            <option value="simkin">Simkin glider gun</option>
+            <option value="pulsar">Pulsar</option>
+            <option value="penta">Penta-decathlon</option>
+            <option value="beacon">Beacon</option>
+            <option value="toad">Toad</option>
+            </select>
+        </form>
+        
         <script src="./game.js" async></script>
     </body>
 </html>

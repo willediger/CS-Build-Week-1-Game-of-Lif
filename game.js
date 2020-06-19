@@ -95,6 +95,7 @@ const toggleElem = (row, col, pixelSize) => {
     fillPixel(row, col, pixelSize);
 }
 
+
 canvas = document.getElementById("canvas")
 context = canvas.getContext("2d");
 let elemLeft = canvas.offsetLeft;
@@ -107,7 +108,8 @@ const initialize = (size) => {
 }
 
 const pixelSize = 10
-initialize(50)
+const pixelWidth = 51
+initialize(pixelWidth)
 
 canvas.addEventListener('click', function(event) {
    let xVal = event.pageX - elemLeft;

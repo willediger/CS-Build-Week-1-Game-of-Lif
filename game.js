@@ -86,10 +86,10 @@ async function tick() {
 const toggleElem = (row, col, pixelSize) => {
     curr = matrix[row][col]
     if (curr) {
-        matrix[row][col] = 0
+        matrix[row][col] = 0;
         context.fillStyle = "#fff";
     } else {
-        matrix[row][col] = 1
+        matrix[row][col] = 1;
         context.fillStyle = "#000";
     }
     fillPixel(row, col, pixelSize);

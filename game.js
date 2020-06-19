@@ -21,6 +21,9 @@ const copyMatrix = src => {
     });
 }
 
+const fillPixel = (col,row,pixelSize) => {
+    context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
+}
 
 const drawGrid = (matrix, context, pixelSize) => { 
     width = matrix.length * pixelSize
@@ -29,10 +32,10 @@ const drawGrid = (matrix, context, pixelSize) => {
         for (let col = 0; col < matrix.length; col++) {
             if (matrix[row][col] === 1) {
                 context.fillStyle = "#000";
-                context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
+                fillPixel(row, col, pixelSize);
             } else {
                 context.fillStyle = "#fff";
-                context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
+                fillPixel(row, col, pixelSize);
             }
         }
     }
@@ -89,7 +92,7 @@ const toggleElem = (row, col, pixelSize) => {
         matrix[row][col] = 1
         context.fillStyle = "#000";
     }
-    context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
+    fillPixel(row, col, pixelSize);
 }
 
 canvas = document.getElementById("canvas")

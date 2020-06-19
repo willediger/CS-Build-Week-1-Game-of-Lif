@@ -75,13 +75,6 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function tick() {
-    drawGrid(matrix, context, pixelSize);
-    conway(matrix, next_matrix)
-    matrix = copyMatrix(next_matrix)
-    await sleep(200)
-    requestAnimationFrame(tick);
-}
 
 const toggleElem = (row, col, pixelSize) => {
     curr = matrix[row][col]
@@ -120,7 +113,6 @@ canvas.addEventListener('click', function(event) {
 
 }, false);
 
-tick()
 
 //based on "0" being middle of grid
 const patterns = [
@@ -155,3 +147,15 @@ for (let i = 0; i < patterns.length; i++) {
         patterns[i][j][1] += middle
     }
 }
+
+
+ async function tick() {
+    drawGrid(matrix, context, pixelSize);
+    conway(matrix, next_matrix)
+    // matrix = copyMatrix(next_matrix)
+    // await sleep(200)
+    // requestAnimationFrame(tick);
+}
+
+
+tick()

@@ -21,7 +21,7 @@ const copyMatrix = src => {
     });
 }
 
-const fillPixel = (col,row,pixelSize) => {
+const fillPixel = (row,col,pixelSize) => {
     context.fillRect(col*pixelSize, row*pixelSize, pixelSize, pixelSize);
 }
 
@@ -111,7 +111,7 @@ canvas.addEventListener('click', function(event) {
    let yVal = event.pageY - elemTop;
    let row = Math.floor(yVal / pixelSize)
    let col = Math.floor(xVal / pixelSize)
-   toggleElem(col, row, pixelSize)
+   toggleElem(row, col, pixelSize)
 
 }, false);
 
@@ -172,7 +172,7 @@ pattern.addEventListener('change', function(event) {
  const drawPattern = (pattern) => {
      for (let i = 0; i < pattern.length; i++) {
         console.log(pattern[i])
-        matrix[pattern[i][1]][pattern[i][0]] = 1
+        matrix[pattern[i][0]][pattern[i][1]] = 1
      }
  }
 

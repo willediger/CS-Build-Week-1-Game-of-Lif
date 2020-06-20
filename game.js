@@ -28,14 +28,14 @@ const fillPixel = (row,col,pixelSize) => {
 const drawGrid = (matrix, context, pixelSize) => { 
     width = matrix.length * pixelSize
     context.clearRect(0, 0, width, width);
-    for (let row = 0; row < matrix.length; row++) {
-        for (let col = 0; col < matrix.length; col++) {
+    for (let row = 12; row < matrix.length - 12; row++) {
+        for (let col = 12; col < matrix.length - 12; col++) {
             if (matrix[row][col] === 1) {
                 context.fillStyle = "#000";
-                fillPixel(row, col, pixelSize);
+                fillPixel(row-12, col-12, pixelSize);
             } else {
                 context.fillStyle = "#fff";
-                fillPixel(row, col, pixelSize);
+                fillPixel(row-12, col-12, pixelSize);
             }
         }
     }
@@ -103,7 +103,7 @@ const initialize = (size) => {
 }
 
 const pixelSize = 10
-const pixelWidth = 51
+const pixelWidth = 75
 initialize(pixelWidth)
 
 canvas.addEventListener('click', function(event) {

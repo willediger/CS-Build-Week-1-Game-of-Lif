@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Conway's Game of Life in HTML5 Canvas</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <canvas id="canvas" width="510" height="510"></canvas>
+        
+        <form>
+            <label for="pattern">Choose a pattern:</label>
+            <div id="controls" style="display:flex; width: 510">
+                <select name="pattern" id="pattern">
+                    <option value="select">Select Pattern</option>
+                    <option value="random">Random</option>
+                    <option value="blank">Blank</option>
+                    <option value="glider">Glider</option>
+                    <option value="lwss">Light-weight spaceship</option>
+                    <option value="mwss">Middle-weight spaceship</option>
+                    <option value="hwss">Heavy-weight spaceship</option>
+                    <option value="gosper">Gosper glider gun</option>
+                    <option value="simkin">Simkin glider gun</option>
+                    <option value="pulsar">Pulsar</option>
+                    <option value="penta">Penta-decathlon</option>
+                    <option value="beacon">Beacon</option>
+                    <option value="toad">Toad</option>
+                </select>
+                
+                <button id="start" type="button" style="margin-left: 5px">Start</button>
+                <button id="stop" type="button" style="margin-left: 5px">Stop</button>
+                <button id="clear" type="button" style="margin-left: 5px">Clear</button>
+    
+                <span style="margin-left: 80px;">Generation: </span><span id="count" style="margin-left: 4px;">0</span>
+
+            </div>
+        </form>
+        <p>Note, the game board is actually 75x75 tiles, but only 51x51 tiles are displayed.</p>
+        
+        
+        <script src="./game.js" async></script>
+    </body>
+</html>

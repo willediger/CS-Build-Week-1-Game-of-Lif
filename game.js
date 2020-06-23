@@ -156,9 +156,17 @@ for (let i = 0; i < patterns.length; i++) {
 
 let pattern = document.getElementById("pattern")
 
+const clear = () => {
+    loop = false;
+    generations = -1;
+    increment()
+    initialize(pixelWidth)
+}
+
+
 
 pattern.addEventListener('change', function(event) {
-    initialize(pixelWidth)
+    clear()
     if (pattern.selectedIndex == 1) {
         randomizeMatrix(matrix)
         drawGrid(matrix, context, pixelSize);
@@ -171,12 +179,18 @@ pattern.addEventListener('change', function(event) {
 
  const drawPattern = (pattern) => {
      for (let i = 0; i < pattern.length; i++) {
-        console.log(pattern[i])
         matrix[pattern[i][0]][pattern[i][1]] = 1
      }
  }
 
 
+ generations = 0
+ const count = document.getElementById("count")
+
+ const increment = () => {
+     generations++
+     count.innerText = generations
+ }
 
 
  let loop = false
@@ -185,15 +199,16 @@ pattern.addEventListener('change', function(event) {
         drawGrid(matrix, context, pixelSize);
         conway(matrix, next_matrix)
         matrix = copyMatrix(next_matrix)
+        increment()
         await sleep(200)
     }
     requestAnimationFrame(tick);
 }
 
 
-
 const start = document.getElementById("start")
 const stop = document.getElementById("stop")
+const clearBtn = document.getElementById("clear")
 
 start.addEventListener('click', function(event) {
     loop = true;
@@ -201,6 +216,12 @@ start.addEventListener('click', function(event) {
 
 stop.addEventListener('click', function(event) {
     loop = false;
+}, false);
+
+clearBtn.addEventListener('click', function(event) {
+    clear();
+    drawGrid(matrix, context, pixelSize);
+    pattern.selectedIndex = 2;
 }, false);
 
 

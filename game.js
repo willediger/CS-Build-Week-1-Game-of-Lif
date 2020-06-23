@@ -176,6 +176,13 @@ pattern.addEventListener('change', function(event) {
     }
  
  }, false);
+ 
+ const speed = document.getElementById("speed")
+ 
+ speed.addEventListener('change', function(event) {
+     timeBetween = 1000/(speed.selectedIndex+1)
+  
+  }, false);
 
  const drawPattern = (pattern) => {
      for (let i = 0; i < pattern.length; i++) {
@@ -184,23 +191,23 @@ pattern.addEventListener('change', function(event) {
  }
 
 
- generations = 0
- const count = document.getElementById("count")
+generations = 0
+const count = document.getElementById("count")
 
- const increment = () => {
-     generations++
-     count.innerText = generations
+const increment = () => {
+    generations++
+    count.innerText = generations
  }
 
-
- let loop = false
- async function tick() {
+let timeBetween = 200
+let loop = false
+async function tick() {
     if (loop) {
         drawGrid(matrix, context, pixelSize);
         conway(matrix, next_matrix)
         matrix = copyMatrix(next_matrix)
         increment()
-        await sleep(200)
+        await sleep(timeBetween)
     }
     requestAnimationFrame(tick);
 }
@@ -209,6 +216,7 @@ pattern.addEventListener('change', function(event) {
 const start = document.getElementById("start")
 const stop = document.getElementById("stop")
 const clearBtn = document.getElementById("clear")
+
 
 start.addEventListener('click', function(event) {
     loop = true;

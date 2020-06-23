@@ -18,7 +18,11 @@
         <canvas id="canvas" width="510" height="510"></canvas>
         
         <form>
-            <label for="pattern">Choose a pattern:</label>
+            <div>
+                <label for="pattern">Choose a pattern:</label>
+                <label for="speed" style="margin-left:58px">Speed:</label>
+            </div>
+            
             <div id="controls" style="display:flex; width: 510">
                 <select name="pattern" id="pattern">
                     <option value="select">Select Pattern</option>
@@ -36,11 +40,24 @@
                     <option value="toad">Toad</option>
                 </select>
                 
+                <select name="speed" id="speed" style="margin-left: 5px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                
                 <button id="start" type="button" style="margin-left: 5px">Start</button>
                 <button id="stop" type="button" style="margin-left: 5px">Stop</button>
                 <button id="clear" type="button" style="margin-left: 5px">Clear</button>
     
-                <span style="margin-left: 80px;">Generation: </span><span id="count" style="margin-left: 4px;">0</span>
+                <span style="margin-left: 50px;">Generation: </span><span id="count" style="margin-left: 4px;">0</span>
 
             </div>
         </form>

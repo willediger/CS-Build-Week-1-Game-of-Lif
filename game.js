@@ -79,10 +79,10 @@ function sleep(ms) {
 const toggleElem = (row, col, pixelSize) => {
     curr = matrix[row][col]
     if (curr) {
-        matrix[row-12][col-12] = 0;
+        matrix[row+12][col+12] = 0;
         context.fillStyle = "#fff";
     } else {
-        matrix[row-12][col-12] = 1;
+        matrix[row+12][col+12] = 1;
         context.fillStyle = "#000";
     }
     fillPixel(row, col, pixelSize);
